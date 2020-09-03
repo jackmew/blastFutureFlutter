@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:blastFutureFlutter/screens/first_screen.dart';
 import 'package:blastFutureFlutter/screens/geolocator_screen.dart';
+import 'package:blastFutureFlutter/screens/layout_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => FirstScreen(),
         '/geolocator': (context) => GeolocatorScreen(),
+        '/layout': (context) => LayoutScreen(),
       },
     );
   }
