@@ -35,8 +35,13 @@ dependencies:
   package_info: ^0.4.3
 
 dev_dependencies:
+  flutter_launcher_name: "^0.0.1"
   flutter_test:
     sdk: flutter
+flutter_launcher_name:
+  name: "Zest Flutter"
+# flutter pub get
+# flutter pub run flutter_launcher_name:main
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

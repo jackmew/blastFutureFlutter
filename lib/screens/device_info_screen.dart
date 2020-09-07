@@ -92,38 +92,37 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-              Platform.isAndroid ? 'Android Device Info' : 'iOS Device Info'),
-        ),
-        body: ListView(
-          children: _deviceData.keys.map((String property) {
-            return Row(
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    property,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.cyan,
+        title: Text(
+            Platform.isAndroid ? 'Android Device Info' : 'iOS Device Info'),
+      ),
+      body: ListView(
+        children: _deviceData.keys.map((String property) {
+          return Row(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  property,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Expanded(
-                    child: Container(
-                  padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                  child: Text(
-                    '${_deviceData[property]}',
-                    maxLines: 10,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )),
-              ],
-            );
-          }).toList(),
-        ),
+              ),
+              Expanded(
+                  child: Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Text(
+                  '${_deviceData[property]}',
+                  maxLines: 10,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              )),
+            ],
+          );
+        }).toList(),
       ),
     );
   }
