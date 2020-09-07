@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:blastFutureFlutter/screens/first_screen.dart';
 import 'package:blastFutureFlutter/screens/geolocator_screen.dart';
 import 'package:blastFutureFlutter/screens/layout_screen.dart';
+import 'package:blastFutureFlutter/screens/map_screen.dart';
+import 'package:blastFutureFlutter/screens/device_info_screen.dart';
+import 'package:blastFutureFlutter/screens/package_info_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,6 +37,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => FirstScreen(),
         '/geolocator': (context) => GeolocatorScreen(),
         '/layout': (context) => LayoutScreen(),
+        '/map': (context) => MapScreen(),
+        '/deviceInfo': (context) => DeviceInfoScreen(),
+        '/packageInfo': (context) => PackageInfoScreen(),
       },
     );
   }

@@ -31,6 +31,16 @@ class FirstScreen extends StatelessWidget {
                   context: context,
                   color: Colors.red,
                   screenName: 'geolocator'),
+              buildButton(
+                  context: context, color: Colors.teal, screenName: 'map'),
+              buildButton(
+                  context: context,
+                  color: Colors.cyan,
+                  screenName: 'deviceInfo'),
+              buildButton(
+                  context: context,
+                  color: Colors.deepOrangeAccent,
+                  screenName: 'packageInfo'),
             ],
           ),
         ),
