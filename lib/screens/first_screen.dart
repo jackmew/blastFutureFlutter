@@ -41,6 +41,18 @@ class FirstScreen extends StatelessWidget {
                   context: context,
                   color: Colors.deepOrangeAccent,
                   screenName: 'packageInfo'),
+              buildButton(
+                  context: context,
+                  color: Colors.amber,
+                  screenName: 'bottomSheet'),
+              buildButton(
+                  context: context,
+                  color: Colors.black12,
+                  screenName: 'smrtStartScreen'),
+              buildButton(
+                  context: context,
+                  color: Colors.black12,
+                  screenName: 'smrtSettingScreen'),
             ],
           ),
         ),
