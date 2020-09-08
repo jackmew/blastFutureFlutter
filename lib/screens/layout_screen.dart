@@ -5,7 +5,6 @@ class LayoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.purple,
           title: Text('Layout'),
         ),
         body: Column(

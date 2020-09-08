@@ -12,7 +12,6 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
         title: Text('Map'),
       ),
       body: GoogleMap(

@@ -94,7 +94,6 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan,
         title: Text(
             Platform.isAndroid ? 'Android Device Info' : 'iOS Device Info'),
       ),

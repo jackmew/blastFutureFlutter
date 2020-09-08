@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/cupertino.dart';
 
-FlatButton buildButton({BuildContext context, Color color, String screenName}) {
+FlatButton buildButton({BuildContext context, String screenName}) {
   return FlatButton.icon(
     label: Text(screenName),
     icon: Icon(Icons.done),
-    color: color,
     onPressed: () {
       print('button: $screenName');
       Navigator.pushNamed(context, '/$screenName');
@@ -25,38 +24,15 @@ class FirstScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: <Widget>[
-              buildButton(
-                  context: context, color: Colors.purple, screenName: 'layout'),
-              buildButton(
-                  context: context,
-                  color: Colors.red,
-                  screenName: 'geolocator'),
-              buildButton(
-                  context: context, color: Colors.teal, screenName: 'map'),
-              buildButton(
-                  context: context,
-                  color: Colors.cyan,
-                  screenName: 'deviceInfo'),
-              buildButton(
-                  context: context,
-                  color: Colors.deepOrangeAccent,
-                  screenName: 'packageInfo'),
-              buildButton(
-                  context: context,
-                  color: Colors.amber,
-                  screenName: 'bottomSheet'),
-              buildButton(
-                  context: context,
-                  color: Colors.amber,
-                  screenName: 'testAlertDialog'),
-              buildButton(
-                  context: context,
-                  color: Colors.black12,
-                  screenName: 'smrtStartScreen'),
-              buildButton(
-                  context: context,
-                  color: Colors.black12,
-                  screenName: 'smrtSettingScreen'),
+              buildButton(context: context, screenName: 'layout'),
+              buildButton(context: context, screenName: 'geolocator'),
+              buildButton(context: context, screenName: 'map'),
+              buildButton(context: context, screenName: 'deviceInfo'),
+              buildButton(context: context, screenName: 'packageInfo'),
+              buildButton(context: context, screenName: 'bottomSheet'),
+              buildButton(context: context, screenName: 'testAlertDialog'),
+              buildButton(context: context, screenName: 'smrtStartScreen'),
+              buildButton(context: context, screenName: 'smrtSettingScreen'),
             ],
           ),
         ),

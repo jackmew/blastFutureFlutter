@@ -29,7 +29,6 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
         title: Text('Bottom sheet Screen'),
       ),
       body: ExpandableBottomSheet(

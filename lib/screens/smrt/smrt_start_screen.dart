@@ -30,7 +30,6 @@ class _SmrtStartScreenState extends State<SmrtStartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black12,
         title: Text('SMRT'),
       ),
       body: ExpandableBottomSheet(

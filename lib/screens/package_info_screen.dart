@@ -38,7 +38,6 @@ class _PackageInfoScreenState extends State<PackageInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepOrangeAccent,
         title: Text('Package Info'),
       ),
       body: Column(

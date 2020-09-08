@@ -35,6 +35,11 @@ class MyApp extends StatelessWidget {
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        primaryColor: Color(0xFFDE6A1B),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Color(0xFFDE6A1B),
+        ),
+        toggleableActiveColor: Color(0xFFDE6A1B),
       ),
       initialRoute: '/',
       routes: {
