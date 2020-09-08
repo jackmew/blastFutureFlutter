@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:package_info/package_info.dart';
 
 class SmrtSettingScreen extends StatefulWidget {
   @override
@@ -15,11 +17,27 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
   String mobileNo = '';
   int distance = 50;
 
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+  );
+
   @override
   void initState() {
     super.initState();
     focusNodeStaffId = FocusNode();
     focusNodeMobileNo = FocusNode();
+
+    _initPackageInfo();
+  }
+
+  Future<void> _initPackageInfo() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
   }
 
   @override
@@ -59,7 +77,7 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                             }
                             return null;
                           },
-                          autofocus: true,
+                          // autofocus: true,
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: (v) {
                             FocusScope.of(context)
@@ -127,6 +145,11 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                               distance = value;
                             });
                           },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.filter_vintage),
+                          title: Text(
+                              'version: ${_packageInfo.version}+${_packageInfo.buildNumber}'),
                         ),
                         SizedBox(
                           width: double.infinity,
