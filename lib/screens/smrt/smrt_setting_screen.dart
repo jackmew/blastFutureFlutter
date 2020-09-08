@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:package_info/package_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SmrtSettingScreen extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class SmrtSettingScreen extends StatefulWidget {
 }
 
 class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   final _formKey = GlobalKey<FormState>();
   FocusNode focusNodeStaffId;
   FocusNode focusNodeMobileNo;
@@ -31,12 +34,32 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
     focusNodeMobileNo = FocusNode();
 
     _initPackageInfo();
+    _initLocalStorage();
   }
 
   Future<void> _initPackageInfo() async {
     final PackageInfo info = await PackageInfo.fromPlatform();
     setState(() {
       _packageInfo = info;
+    });
+  }
+
+  Future<void> _initLocalStorage() async {
+    final SharedPreferences prefs = await _prefs;
+
+    String nricSaved = prefs.getString('nric') ?? '';
+    String staffIdSaved = prefs.getString('staffId') ?? '';
+    String mobileNoSaved = prefs.getString('mobileNo') ?? '';
+    int distanceSaved = prefs.getInt('distance') ?? 50;
+
+    print(
+        'nricSaved: $nricSaved, staffIdSaved: $staffIdSaved, mobileNoSaved: $mobileNoSaved, distanceSaved: $distanceSaved');
+
+    setState(() {
+      nric = nricSaved;
+      staffId = staffIdSaved;
+      mobileNo = mobileNoSaved;
+      distance = distanceSaved;
     });
   }
 
@@ -48,7 +71,37 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
     super.dispose();
   }
 
-  void save() {}
+  void save() async {
+    print(
+      'nric: $nric, staffId: $staffId, mobileNo: $mobileNo, distance: $distance',
+    );
+    var valid = _formKey.currentState.validate();
+    if (!valid) {
+      return;
+    }
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Your Info'),
+        content: Text(
+            'nric: $nric, staffId: $staffId, mobileNo: $mobileNo, distance: $distance'),
+        actions: [
+          FlatButton(
+            child: Text('Done'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+    final SharedPreferences prefs = await _prefs;
+    await prefs.setString('nric', nric);
+    await prefs.setString('staffId', staffId);
+    await prefs.setString('mobileNo', mobileNo);
+    await prefs.setInt('distance', distance);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,6 +141,7 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                             hintText: 'Enter a nric...',
                             labelText: 'NRIC',
                           ),
+                          controller: TextEditingController(text: nric),
                           onChanged: (value) {
                             setState(() {
                               nric = value;
@@ -112,6 +166,7 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                             hintText: 'Enter a staff ID...',
                             labelText: 'Staff ID',
                           ),
+                          controller: TextEditingController(text: staffId),
                           onChanged: (value) {
                             setState(() {
                               staffId = value;
@@ -132,6 +187,7 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                             hintText: 'Enter a mobile number...',
                             labelText: 'Mobile Number',
                           ),
+                          controller: TextEditingController(text: mobileNo),
                           onChanged: (value) {
                             setState(() {
                               mobileNo = value;
@@ -155,29 +211,7 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                           width: double.infinity,
                           child: RaisedButton(
                             onPressed: () {
-                              print(
-                                'nric: $nric, staffId: $staffId, mobileNo: $mobileNo, distance: $distance',
-                              );
-                              var valid = _formKey.currentState.validate();
-                              if (!valid) {
-                                return;
-                              }
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: Text('Your Info'),
-                                  content: Text(
-                                      'nric: $nric, staffId: $staffId, mobileNo: $mobileNo, distance: $distance'),
-                                  actions: [
-                                    FlatButton(
-                                      child: Text('Done'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              );
+                              save();
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
