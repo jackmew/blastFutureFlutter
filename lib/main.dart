@@ -6,6 +6,7 @@ import 'package:blastFutureFlutter/screens/map_screen.dart';
 import 'package:blastFutureFlutter/screens/device_info_screen.dart';
 import 'package:blastFutureFlutter/screens/package_info_screen.dart';
 import 'package:blastFutureFlutter/screens/bottom_sheet_screen.dart';
+import 'package:blastFutureFlutter/screens/test_alert_dialog_screen.dart';
 import 'package:blastFutureFlutter/screens/smrt/smrt_start_screen.dart';
 import 'package:blastFutureFlutter/screens/smrt/smrt_setting_screen.dart';
 
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         '/deviceInfo': (context) => DeviceInfoScreen(),
         '/packageInfo': (context) => PackageInfoScreen(),
         '/bottomSheet': (context) => BottomSheetScreen(),
+        '/testAlertDialog': (context) => TestAlertDialogScreen(),
         '/smrtStartScreen': (context) => SmrtStartScreen(),
         '/smrtSettingScreen': (context) => SmrtSettingScreen(),
       },

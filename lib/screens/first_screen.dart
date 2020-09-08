@@ -47,6 +47,10 @@ class FirstScreen extends StatelessWidget {
                   screenName: 'bottomSheet'),
               buildButton(
                   context: context,
+                  color: Colors.amber,
+                  screenName: 'testAlertDialog'),
+              buildButton(
+                  context: context,
                   color: Colors.black12,
                   screenName: 'smrtStartScreen'),
               buildButton(
