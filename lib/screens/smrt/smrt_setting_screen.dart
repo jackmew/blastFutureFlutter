@@ -7,11 +7,30 @@ class SmrtSettingScreen extends StatefulWidget {
 
 class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
   final _formKey = GlobalKey<FormState>();
+  FocusNode focusNodeStaffId;
+  FocusNode focusNodeMobileNo;
+
   String nric = '';
   String staffId = '';
   String mobileNo = '';
   int distance = 50;
 
+  @override
+  void initState() {
+    super.initState();
+    focusNodeStaffId = FocusNode();
+    focusNodeMobileNo = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    focusNodeStaffId.dispose();
+    focusNodeMobileNo.dispose();
+    super.dispose();
+  }
+
+  void save() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,10 +53,18 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                     children: [
                       ...[
                         TextFormField(
-                          // text content color
-                          // style: TextStyle(
-                          //   color: Colors.red,
-                          // ),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Required';
+                            }
+                            return null;
+                          },
+                          autofocus: true,
+                          textInputAction: TextInputAction.next,
+                          onFieldSubmitted: (v) {
+                            FocusScope.of(context)
+                                .requestFocus(focusNodeStaffId);
+                          },
                           decoration: InputDecoration(
                             filled: true,
                             hintText: 'Enter a nric...',
@@ -50,6 +77,18 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                           },
                         ),
                         TextFormField(
+                          focusNode: focusNodeStaffId,
+                          textInputAction: TextInputAction.next,
+                          onFieldSubmitted: (v) {
+                            FocusScope.of(context)
+                                .requestFocus(focusNodeMobileNo);
+                          },
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Required';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
                             filled: true,
                             hintText: 'Enter a staff ID...',
@@ -62,6 +101,14 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                           },
                         ),
                         TextFormField(
+                          focusNode: focusNodeMobileNo,
+                          textInputAction: TextInputAction.done,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Required';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
                             filled: true,
                             hintText: 'Enter a mobile number...',
@@ -87,6 +134,26 @@ class _SmrtSettingScreenState extends State<SmrtSettingScreen> {
                             onPressed: () {
                               print(
                                 'nric: $nric, staffId: $staffId, mobileNo: $mobileNo, distance: $distance',
+                              );
+                              var valid = _formKey.currentState.validate();
+                              if (!valid) {
+                                return;
+                              }
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text('Your Info'),
+                                  content: Text(
+                                      'nric: $nric, staffId: $staffId, mobileNo: $mobileNo, distance: $distance'),
+                                  actions: [
+                                    FlatButton(
+                                      child: Text('Done'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                ),
                               );
                             },
                             shape: RoundedRectangleBorder(
